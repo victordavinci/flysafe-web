@@ -63,162 +63,181 @@
 </template>
 
 <script>
-import datatypes from '@/datatypes'
-import Aircraft from '@/components/Aircraft.vue'
-import Modal from '@/components/Modal.vue'
+import datatypes from "@/datatypes";
+import Aircraft from "@/components/Aircraft.vue";
+import Modal from "@/components/Modal.vue";
 
 export default {
-    name: 'NewReport',
-    components: {
-        Aircraft,
-        Modal
-    },
-    data: function () {
-        return {
-            showModal: false,
-            aircraftTypes: datatypes.aircraftTypes,
-            aircraftType: '',
-            registration: '',
-            aircraftError: '',
+  name: "NewReport",
+  components: {
+    Aircraft,
+    Modal
+  },
+  data: function() {
+    return {
+      showModal: false,
+      aircraftTypes: datatypes.aircraftTypes,
+      aircraftType: "",
+      registration: "",
+      aircraftError: "",
 
-            occurrenceTypes: datatypes.occurrenceTypes,
-            occurrenceType: '',
-            date: '',
-            narrative: '',
-            aircrafts: [],
-            reportError: ''
+      occurrenceTypes: datatypes.occurrenceTypes,
+      occurrenceType: "",
+      date: "",
+      narrative: "",
+      aircrafts: [],
+      reportError: ""
+    };
+  },
+  methods: {
+    onSubmit: function() {
+      if (this.date === "") {
+        this.reportError = "The date field is required";
+      } else if (this.occurrenceType === "") {
+        this.reportError = "Occurrence type is required";
+      } else if (this.aircrafts.length === 0) {
+        this.reportError = "You have to add at least one aircraft";
+      }
+      if (this.reportError !== "") {
+        return;
+      }
+      var vm = this,
+        db = this.$store.state.db,
+        user = this.$store.state.user,
+        stats = db.ref("stats"),
+        inc = function(cv) {
+          return (cv || 0) + 1;
+        },
+        date = new Date(this.date),
+        year = date.getFullYear();
+      Promise.all([
+        stats.child("report-count").transaction(inc),
+        stats
+          .child("occurrence-type-count-" + vm.occurrenceType)
+          .transaction(inc),
+        stats
+          .child("reports-count")
+          .child(year)
+          .transaction(inc),
+        stats
+          .child("occurrences-type-count-" + vm.occurrenceType)
+          .child(year)
+          .transaction(inc)
+      ]).then(() => {
+        var ref = db.ref("reports").push().key,
+          data = {},
+          aircrafts = [],
+          a;
+        for (a of vm.aircrafts) {
+          aircrafts[a.registration] = a.type;
         }
-    },
-    methods: {
-        onSubmit: function () {
-            if (this.date === '') {
-                this.reportError = 'The date field is required'
-            } else if (this.occurrenceType === '') {
-                this.reportError = 'Occurrence type is required'
-            } else if (this.aircrafts.length === 0) {
-                this.reportError = 'You have to add at least one aircraft'
-            }
-            if (this.reportError !== '') {
-                return
-            }
-            var vm = this,
-                db = this.$store.state.db,
-                user = this.$store.state.user,
-                stats = db.ref('stats'),
-                inc = function (cv) {
-                    return (cv ||0) + 1
-                },
-                date = new Date(this.date),
-                year = date.getFullYear();
-            Promise.all([
-                stats.child('report-count').transaction(inc),
-                stats.child('occurrence-type-count-'+ vm.occurrenceType).transaction(inc),
-                stats.child('reports-count').child(year).transaction(inc),
-                stats.child('occurrences-type-count-' + vm.occurrenceType).child(year).transaction(inc)
-            ]).then(() => {
-                var ref = db.ref('reports').push().key,
-                    data = {}, aircrafts = [], a
-                for (a of vm.aircrafts) {
-                    aircrafts[a.registration] = a.type
-                }
-                data['/reports/' + ref] = {
-                    date: vm.date,
-                    type: vm.occurrenceType,
-                    aircrafts: aircrafts,
-                    narrative: vm.narrative,
-                    user: user.uid
-                }
-                for (a of vm.aircrafts) {
-                    data['/aircrafts/' + a.registration + '/' + ref] = true
-                }
-                db.ref().update(data)
+        data["/reports/" + ref] = {
+          date: vm.date,
+          type: vm.occurrenceType,
+          aircrafts: aircrafts,
+          narrative: vm.narrative,
+          user: user.uid
+        };
+        for (a of vm.aircrafts) {
+          data["/aircrafts/" + a.registration + "/" + ref] = true;
+        }
+        db.ref().update(data);
 
-                this.aircraftType = ''
-                this.registration = ''
-                this.occurrenceType = ''
-                this.date = ''
-                this.narrative = ''
-                this.aircrafts = []
-                vm.$router.replace('/reports')
-            })
-        },
-        onAircraftSubmit: function () {
-            this.aircraftError = ''
-            if (this.registration === '' || this.aircraftType === '') {
-                this.aircraftError = 'All fields are required'
-                return
-            }
-            this.aircrafts.push({
-                type: parseInt(this.aircraftType, 10),
-                registration: this.registration
-            })
-            this.showModal = false
-            this.aircraftType = ''
-            this.registration = ''
-        },
-        removeAircraft: function (aircraft) {
-            this.aircrafts.splice(this.aircrafts.indexOf(aircraft), 1)
-        }
+        this.aircraftType = "";
+        this.registration = "";
+        this.occurrenceType = "";
+        this.date = "";
+        this.narrative = "";
+        this.aircrafts = [];
+        vm.$router.replace("/reports");
+      });
+    },
+    onAircraftSubmit: function() {
+      this.aircraftError = "";
+      if (this.registration === "" || this.aircraftType === "") {
+        this.aircraftError = "All fields are required";
+        return;
+      }
+      this.aircrafts.push({
+        type: parseInt(this.aircraftType, 10),
+        registration: this.registration
+      });
+      this.showModal = false;
+      this.aircraftType = "";
+      this.registration = "";
+    },
+    removeAircraft: function(aircraft) {
+      this.aircrafts.splice(this.aircrafts.indexOf(aircraft), 1);
     }
-}
+  }
+};
 </script>
 
 <style scoped>
-h3, .text-center {
-    text-align: center;
+h3,
+.text-center {
+  text-align: center;
 }
 
 .error {
-    color: #7F0000;
+  color: #7f0000;
 }
 
 form {
-    max-width: 600px;
-    margin: auto;
-    display: table;
+  max-width: 600px;
+  margin: auto;
+  display: table;
 }
 
 form .row {
-    display: table-row;
+  display: table-row;
 }
 
-form .row > label, form .row > div {
-    display: table-cell;
-    vertical-align: top;
+form .row > label,
+form .row > div {
+  display: table-cell;
+  vertical-align: top;
 }
 
-form .row > div:last-child, form .row > input, form .row > textarea, form .row > button, form .row > select {
-    display: table-cell;
-    vertical-align: top;
-    min-width: 400px;
+form .row > div:last-child,
+form .row > input,
+form .row > textarea,
+form .row > button,
+form .row > select {
+  display: table-cell;
+  vertical-align: top;
+  min-width: 400px;
 }
 
 .new-aircraft {
-    border-bottom: 1px solid lightgray;
-    overflow: hidden;
-    margin-bottom: 4px;
-    padding-bottom: 4px;
+  border-bottom: 1px solid lightgray;
+  overflow: hidden;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
 }
 
-.modal-body > form, .modal-body > form input, .modal-body > form select {
-    min-width: 100%;
-    max-width: 100%;
-    width: 100%;
+.modal-body > form,
+.modal-body > form input,
+.modal-body > form select {
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
 }
 
 .new-aircraft > .aircraft {
-    margin: 0;
+  margin: 0;
 }
 
 .new-aircraft button {
-    float: right;
+  float: right;
 }
 
-.button-right, .add-aircraft {
-    text-align: right;
+.button-right,
+.add-aircraft {
+  text-align: right;
 }
 
 .button-right {
-    padding-top: 12px;
+  padding-top: 12px;
 }
 </style>

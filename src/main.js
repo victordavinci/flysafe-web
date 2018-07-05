@@ -26,6 +26,9 @@ store.commit("setDb", firebaseApp.database());
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     store.commit("login", user);
+    if ((localStorage.getItem("location") || "/") === "/") {
+      router.push("/reports");
+    }
   } else {
     store.commit("logout");
   }

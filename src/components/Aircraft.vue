@@ -6,21 +6,21 @@
 </template>
 
 <script>
-import datatypes from '@/datatypes'
+import datatypes from "@/datatypes";
 
 export default {
-    name: 'Aircraft',
-    props: ['aircraft'],
-    computed: {
-        aircraftType: function () {
-            return datatypes.getAircraftTypeName(this.aircraft.type)
-        }
+  name: "Aircraft",
+  props: ["aircraft"],
+  computed: {
+    aircraftType: function() {
+      return datatypes.getAircraftTypeName(this.aircraft.type);
     }
-}
+  }
+};
 </script>
 
 <style scoped>
-    .aircraft {
-        margin: 4px 0;
-    }
+.aircraft {
+  margin: 4px 0;
+}
 </style>
