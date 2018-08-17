@@ -3,6 +3,7 @@ import VueFire from "vuefire";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import * as VueGoogleMaps from "vue2-google-maps";
 
 import firebase from "firebase/app";
 require("firebase/auth");
@@ -11,6 +12,11 @@ require("firebase/storage");
 
 Vue.config.productionTip = false;
 Vue.use(VueFire);
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyAIfcF4g2UdZcrgsKAxxJ1odUoFL_o7LdQ"
+  }
+});
 
 var app;
 var config = {
