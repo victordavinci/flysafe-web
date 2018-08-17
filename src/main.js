@@ -7,6 +7,7 @@ import store from "./store";
 import firebase from "firebase/app";
 require("firebase/auth");
 require("firebase/database");
+require("firebase/storage");
 
 Vue.config.productionTip = false;
 Vue.use(VueFire);
@@ -22,6 +23,7 @@ var config = {
 };
 var firebaseApp = firebase.initializeApp(config);
 store.commit("setDb", firebaseApp.database());
+store.commit("setStorage", firebase.storage());
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {

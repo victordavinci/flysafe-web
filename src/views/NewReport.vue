@@ -29,8 +29,15 @@
                 </div>
             </div>
             <div class="row">
+              <label for="photo"><b>Photo: </b></label>
+              <div>
+                <input type="file" @change="encodeImageFileAsURL" ref="fileInput" />
+                <button v-if="photo" @click.prevent="removePhoto">X</button>
+              </div>
+            </div>
+            <div class="row">
                 <div></div>
-                <div class="button-right"><button>Submit Report</button></div>
+                <div class="button-right"><button>Submit Report{{ progress }}</button></div>
             </div>
         </form>
         <Modal v-if="showModal">
@@ -75,6 +82,8 @@ export default {
   },
   data: function() {
     return {
+      progress: "",
+
       showModal: false,
       aircraftTypes: datatypes.aircraftTypes,
       aircraftType: "",
@@ -86,10 +95,28 @@ export default {
       date: "",
       narrative: "",
       aircrafts: [],
-      reportError: ""
+      reportError: "",
+
+      photo: null
     };
   },
   methods: {
+    encodeImageFileAsURL: function(event) {
+      var vm = this;
+      var file = event.currentTarget.files[0];
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        vm.photo = reader.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    removePhoto: function() {
+      const input = this.$refs.fileInput;
+      input.value = "";
+      input.type = "";
+      input.type = "file";
+      this.photo = null;
+    },
     onSubmit: function() {
       if (this.date === "") {
         this.reportError = "The date field is required";
@@ -104,53 +131,53 @@ export default {
       var vm = this,
         db = this.$store.state.db,
         user = this.$store.state.user,
-        stats = db.ref("stats"),
-        inc = function(cv) {
-          return (cv || 0) + 1;
-        },
-        date = new Date(this.date),
-        year = date.getFullYear();
-      Promise.all([
-        stats.child("report-count").transaction(inc),
-        stats
-          .child("occurrence-type-count-" + vm.occurrenceType)
-          .transaction(inc),
-        stats
-          .child("reports-count")
-          .child(year)
-          .transaction(inc),
-        stats
-          .child("occurrences-type-count-" + vm.occurrenceType)
-          .child(year)
-          .transaction(inc)
-      ]).then(() => {
-        var ref = db.ref("reports").push().key,
-          data = {},
-          aircrafts = [],
-          a;
-        for (a of vm.aircrafts) {
-          aircrafts[a.registration] = a.type;
-        }
-        data["/reports/" + ref] = {
+        ext = vm.photo.match(/^data:[^/]+\/([^;]+)/)[1];
+      vm.progress = "...";
+
+      var ref = db.ref("reports").push().key,
+        aircrafts = [],
+        a;
+      for (a of vm.aircrafts) {
+        aircrafts[a.registration] = { type: a.type };
+      }
+      db
+        .ref("reports/" + ref)
+        .set({
           date: vm.date,
           type: vm.occurrenceType,
           aircrafts: aircrafts,
           narrative: vm.narrative,
-          user: user.uid
-        };
-        for (a of vm.aircrafts) {
-          data["/aircrafts/" + a.registration + "/" + ref] = true;
-        }
-        db.ref().update(data);
-
-        this.aircraftType = "";
-        this.registration = "";
-        this.occurrenceType = "";
-        this.date = "";
-        this.narrative = "";
-        this.aircrafts = [];
-        vm.$router.replace("/reports");
-      });
+          user: user.uid,
+          photoExt: ext
+        })
+        .then(() => {
+          var p = [];
+          for (a of vm.aircrafts) {
+            p.push(db.ref("aircrafts/" + a.registration + "/" + ref).set(true));
+          }
+          return Promise.all(p);
+        })
+        .then(() => {
+          if (vm.photo !== null) {
+            var fref = vm.$store.state.storage
+              .ref()
+              .child("photos/" + ref + "." + ext);
+            return fref.put(this.$refs.fileInput.files[0]);
+          } else {
+            return Promise.resolve();
+          }
+        })
+        .then(() => {
+          vm.aircraftType = "";
+          vm.registration = "";
+          vm.occurrenceType = "";
+          vm.date = "";
+          vm.narrative = "";
+          vm.aircrafts = [];
+          vm.removePhoto();
+          vm.progress = "";
+          vm.$router.replace("/reports");
+        });
     },
     onAircraftSubmit: function() {
       this.aircraftError = "";

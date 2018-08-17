@@ -3,6 +3,7 @@
     <div id="header">
       <router-link to="/"><img class="logo" src="/img/icon.png" /></router-link>
       <div class="align-right">
+        <span v-if="currentUser">{{ currentUser.email }}</span>
         <a href="#" @click.prevent="toggle" v-if="!currentUser"><span>Login</span></a>
         <a href="#" @click.prevent="toggle" v-if="currentUser"><span>Logout</span></a>
       </div>
@@ -25,36 +26,45 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from "firebase/app";
 
 export default {
-  name: 'App',
+  name: "App",
   computed: {
-    currentUser: function () {
-      return this.$store.state.user
+    currentUser: function() {
+      return this.$store.state.user;
     }
   },
   methods: {
-    toggle: function () {
-      var vm = this
+    toggle: function() {
+      var vm = this;
       if (!this.currentUser) {
-        const provider = new firebase.auth.GoogleAuthProvider()
-        firebase.auth().signInWithRedirect(provider).then(function (result) {
-          vm.$store.commit('login', result.user)
-        }).catch(error => console.log(error))
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase
+          .auth()
+          .signInWithRedirect(provider)
+          .then(function(result) {
+            vm.$store.commit("login", result.user);
+          })
+          .catch(error => console.log(error));
       } else {
-        firebase.auth().signOut().then(function () {
-          vm.$store.commit('logout')
-          vm.$router.replace('/')
-        }).catch(error => console.log(error))
+        firebase
+          .auth()
+          .signOut()
+          .then(function() {
+            vm.$store.commit("logout");
+            vm.$router.replace("/");
+          })
+          .catch(error => console.log(error));
       }
     }
   }
-}
+};
 </script>
 
 <style>
-html, body {
+html,
+body {
   margin: 0;
 }
 
@@ -74,9 +84,11 @@ hr {
 #header {
   background: rgb(3, 155, 229);
   height: 100px;
+  color: #fff;
 }
 
-#header .logo, #header .align-right {
+#header .logo,
+#header .align-right {
   width: auto;
   height: 80px;
   margin-top: 10px;
@@ -89,6 +101,11 @@ hr {
   margin-right: 20px;
 }
 
+#header .align-right > span {
+  padding-right: 10px;
+}
+
+#header .align-right > span,
 #header .align-right a {
   vertical-align: middle;
   display: table-cell;
@@ -103,7 +120,7 @@ hr {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #7c858d;
@@ -148,7 +165,6 @@ hr {
 }
 
 #nav a.router-link-exact-active {
-  /*color: #42b983;*/
   color: rgb(3, 155, 229);
 }
 </style>

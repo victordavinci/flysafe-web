@@ -1,13 +1,20 @@
 <template>
     <div :class="reportStyle">
-        <div class="report-date"><b>Date:</b> {{ report.date }}</div>
-        <div class="report-type"><b>Type:</b> {{ reportType }}</div>
-        <div class="aircrafts">
-            <h4>Aircrafts:</h4>
-            <Aircraft v-for="aircraft in aircrafts" :key="aircraft.key" :aircraft="aircraft" />
+        <div>
+          <div class="report-date"><b>Date:</b> {{ report.date }}</div>
+          <div class="report-type"><b>Type:</b> {{ reportType }}</div>
+          <div class="aircrafts">
+              <h4>Aircrafts:</h4>
+              <Aircraft v-for="aircraft in aircrafts" :key="aircraft.key" :aircraft="aircraft" />
+          </div>
+          <div class="narrative" v-if="report.narrative">
+              <b>Narrative:</b> {{ report.narrative }}
+          </div>
         </div>
-        <div class="narrative" v-if="report.narrative">
-            <b>Narrative:</b> {{ report.narrative }}
+        <div>
+          <div class="photo" v-if="photo">
+            <img :src="photo" alt="Photo" />
+          </div>
         </div>
     </div>
 </template>
@@ -22,26 +29,45 @@ export default {
     Aircraft
   },
   props: ["report"],
+  data: function() {
+    return { photo: null };
+  },
+  created: function() {
+    var report = this.report;
+    if (report.photoExt) {
+      var vm = this;
+      this.$store.state.storage
+        .ref()
+        .child("photos/" + report[".key"] + "." + report.photoExt)
+        .getDownloadURL()
+        .then(function(url) {
+          vm.photo = url;
+        });
+    }
+  },
   computed: {
     aircrafts: function() {
-      var a = []
+      var a = [];
       for (var i in this.report.aircrafts) {
         a.push({
           registration: i,
           type: this.report.aircrafts[i].type
-        })
+        });
       }
-      return a
+      return a;
     },
     reportType: function() {
-      return datatypes.getOccurrenceTypeName(this.report.type)
+      return datatypes.getOccurrenceTypeName(this.report.type);
     },
     reportStyle: function() {
       var validated = this.report.validated,
-        color = validated === true ? 'green' : (validated === false ? 'red' : 'gray'),
-        style = { report: true }
-      style[color] = true
-      return style
+        color =
+          validated !== undefined
+            ? ["gray", "red", "green", "blue"][validated]
+            : "gray",
+        style = { report: true };
+      style[color] = true;
+      return style;
     }
   }
 };
@@ -55,13 +81,27 @@ export default {
   overflow: hidden;
 }
 
-.report.green::before {
+.report > div {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.report > div:not(:first-child) {
+  margin-left: 50px;
+}
+
+.report.green::before,
+.report.blue::before {
   content: "✓";
   float: right;
 }
 
 .report.green {
   color: #007b00;
+}
+
+.report.blue {
+  color: #00007b;
 }
 
 .report.red::before {
@@ -73,11 +113,16 @@ export default {
   color: #ab0000;
 }
 
-.report > .aircrafts > h4 {
+.report .photo img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.report .aircrafts > h4 {
   margin: 0;
 }
 
-.report > .aircrafts > div {
+.report .aircrafts > div {
   margin-left: 12px;
 }
 </style>

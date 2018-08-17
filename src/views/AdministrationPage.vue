@@ -1,6 +1,6 @@
 <template>
     <div id="administration">
-        <div><a href="https://console.firebase.google.com/project/webapp-0/database/webapp-0/" target="_blank">Admin</a></div>
+        <div><a href="https://webapp-0.firebaseio.com/" target="_blank">Admin</a></div>
     </div>
 </template>
 
