@@ -4,15 +4,15 @@
       <router-link to="/"><img class="logo" src="/img/icon.png" /></router-link>
       <div class="align-right">
         <span v-if="currentUser">{{ currentUser.email }}</span>
-        <a href="#" @click.prevent="toggle" v-if="!currentUser"><span>Login</span></a>
-        <a href="#" @click.prevent="toggle" v-if="currentUser"><span>Logout</span></a>
+        <a href="#" @click.prevent="toggle" v-if="!currentUser"><span>Iniciar sesi&oacute;n</span></a>
+        <a href="#" @click.prevent="toggle" v-if="currentUser"><span>Cerrar sesi&oacute;n</span></a>
       </div>
     </div>
     <div id="nav" v-if="currentUser !== null">
-        <router-link to="/">Home</router-link>
-        <router-link to="/reports" v-if="currentUser">Reports</router-link>
-        <router-link to="/search" v-if="currentUser">Search</router-link>
-        <router-link to="/stats">Stats</router-link>
+        <router-link to="/">Inicio</router-link>
+        <router-link to="/reportes" v-if="currentUser">Reportes</router-link>
+        <router-link to="/busqueda" v-if="currentUser">B&uacute;squeda</router-link>
+        <router-link to="/estadisticas">Estad&iacute;sticas</router-link>
     </div>
     <div id="app-body">
       <keep-alive>

@@ -1,7 +1,7 @@
 <template>
     <div id="search">
-        <input type="text" placeholder="Aircraft registration" v-model.trim="registration" @keyup.enter="onSearch" />
-        <button @click="onSearch">Search</button>
+        <input type="text" placeholder="Matrícula" v-model.trim="registration" @keyup.enter="onSearch" />
+        <button @click="onSearch">Buscar</button>
         <hr />
         <div v-if="!reports.length">{{ searchMessage }}</div>
         <ReportsList v-if="reports.length" :reports="reports" />

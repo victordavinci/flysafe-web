@@ -1,6 +1,6 @@
 <template>
   <div class="stats">
-    <bar-chart :chartTitle="'Reports'" :chartLabels="chartLabels" :chartData="chartData" :options="{responsive: true, maintainAspectRatio: false}" />
+    <bar-chart :chartTitle="'Reportes'" :chartLabels="chartLabels" :chartData="chartData" :options="{responsive: true, maintainAspectRatio: false}" />
     <div id="map">
       <GmapMap
         :center="{lat:-38, lng:-61}"

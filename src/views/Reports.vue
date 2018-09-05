@@ -1,7 +1,7 @@
 <template>
     <div id="reports">
-        <div class="my-reports"><label><input type="checkbox" @change="myReports" v-model="propios" /> My reports</label></div>
-        <div class="new-report"><router-link to="reports/new-report">New Report</router-link></div>
+        <div class="my-reports"><label><input type="checkbox" @change="myReports" v-model="propios" /> Mis reportes</label></div>
+        <div class="new-report"><router-link to="reportes/nuevo">Nuevo Reporte</router-link></div>
         <hr class="clearfix" />
         <ReportsList :reports="reverse" />
     </div>

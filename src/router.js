@@ -8,6 +8,9 @@ import SafetyRecommendations from "./views/SafetyRecommendations.vue";
 import NewReport from "./views/NewReport.vue";
 import ReportsSearch from "./views/ReportsSearch.vue";
 import AdministrationPage from "./views/AdministrationPage.vue";
+import DatosPersonales from "./views/DatosPersonales.vue";
+import AndroidApp from "./views/AndroidApp.vue";
+import Funcionalidades from "./views/Funcionalidades.vue";
 
 import firebase from "firebase/app";
 require("firebase/auth");
@@ -23,30 +26,45 @@ var router = new Router({
       component: Home
     },
     {
-      path: "/stats",
+      path: "/datos-personales",
+      name: "datos-personales",
+      component: DatosPersonales
+    },
+    {
+      path: "/app",
+      name: "app",
+      component: AndroidApp
+    },
+    {
+      path: "/funcionalidades",
+      name: "funcionalidades",
+      component: Funcionalidades
+    },
+    {
+      path: "/estadisticas",
       name: "stats",
       component: Stats
     },
     {
-      path: "/reports",
+      path: "/reportes",
       name: "reports",
       component: Reports,
       meta: { requiresAuth: true }
     },
     {
-      path: "/notifications",
+      path: "/rso",
       name: "notifications",
       component: SafetyRecommendations,
       meta: { requiresAuth: true }
     },
     {
-      path: "/reports/new-report",
+      path: "/reportes/nuevo",
       name: "new-report",
       component: NewReport,
       meta: { requiresAuth: true }
     },
     {
-      path: "/search",
+      path: "/busqueda",
       name: "search",
       component: ReportsSearch,
       metha: { requiresAuth: true }

@@ -1,7 +1,7 @@
 <template>
     <div class="aircraft">
-        <div class="aircraft-registration"><b>Registration:</b> {{ aircraft.registration }}</div>
-        <div class="aircraft-type"><b>Type:</b> {{ aircraftType }}</div>
+        <div class="aircraft-registration"><b>Matr&iacute;cula:</b> {{ aircraft.registration }}</div>
+        <div class="aircraft-type"><b>Tipo:</b> {{ aircraftType }}</div>
     </div>
 </template>
 

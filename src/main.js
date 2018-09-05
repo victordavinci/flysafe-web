@@ -3,12 +3,23 @@ import VueFire from "vuefire";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faLock,
+  faClipboardList,
+  faDownload
+} from "@fortawesome/free-solid-svg-icons";
+import { faAndroid } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import * as VueGoogleMaps from "vue2-google-maps";
 
 import firebase from "firebase/app";
 require("firebase/auth");
 require("firebase/database");
 require("firebase/storage");
+
+library.add(faLock, faAndroid, faClipboardList, faDownload);
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 Vue.use(VueFire);
@@ -35,7 +46,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     store.commit("login", user);
     if ((localStorage.getItem("location") || "/") === "/") {
-      router.push("/reports");
+      router.push("/reportes");
     }
   } else {
     store.commit("logout");
