@@ -7,7 +7,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faLock,
   faClipboardList,
-  faDownload
+  faDownload,
+  faFileAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -18,7 +19,7 @@ require("firebase/auth");
 require("firebase/database");
 require("firebase/storage");
 
-library.add(faLock, faAndroid, faClipboardList, faDownload);
+library.add(faLock, faAndroid, faClipboardList, faDownload, faFileAlt);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;

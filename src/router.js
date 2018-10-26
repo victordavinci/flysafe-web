@@ -9,6 +9,7 @@ import NewReport from "./views/NewReport.vue";
 import ReportsSearch from "./views/ReportsSearch.vue";
 import AdministrationPage from "./views/AdministrationPage.vue";
 import DatosPersonales from "./views/DatosPersonales.vue";
+import Documentacion from "./views/Documentacion.vue";
 import AndroidApp from "./views/AndroidApp.vue";
 import Funcionalidades from "./views/Funcionalidades.vue";
 
@@ -29,6 +30,11 @@ var router = new Router({
       path: "/datos-personales",
       name: "datos-personales",
       component: DatosPersonales
+    },
+    {
+      path: "/documentacion",
+      name: "documentacion",
+      component: Documentacion
     },
     {
       path: "/app",

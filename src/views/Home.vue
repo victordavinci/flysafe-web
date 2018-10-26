@@ -22,6 +22,10 @@
         <div class="icon"><font-awesome-icon :icon="['fas', 'clipboard-list']" size="5x" /></div>
         <div class="text">Funcionalidades</div>
       </router-link>
+      <router-link to="/documentacion">
+        <div class="icon"><font-awesome-icon :icon="['fas', 'file-alt']" size="5x" /></div>
+        <div class="text">Documentación</div>
+      </router-link>
     </div>
   </div>
 </template>

@@ -28,16 +28,39 @@ export default {
   },
   methods: {
     renderChart2: function() {
+      let data;
+      if (!Array.isArray(this.chartData)) {
+        data = [
+          {
+            label: this.chartTitle,
+            backgroundColor: "#f97979",
+            data: this.chartData
+          }
+        ];
+      } else {
+        data = [
+          { label: "Total Reports", backgroundColor: "#7979f9", data: [] },
+          { label: "Not validated", backgroundColor: "#797979", data: [] },
+          { label: "Rejected", backgroundColor: "#f97979", data: [] },
+          { label: "Accepted", backgroundColor: "#79f979", data: [] }
+        ];
+        this.chartData[0].forEach(r => {
+          data[0].data.push(r[".value"]);
+        });
+        this.chartData[1].forEach(r => {
+          data[1].data.push(r[".value"]);
+        });
+        this.chartData[2].forEach(r => {
+          data[2].data.push(r[".value"]);
+        });
+        this.chartData[3].forEach(r => {
+          data[3].data.push(r[".value"]);
+        });
+      }
       this.renderChart(
         {
           labels: this.chartLabels,
-          datasets: [
-            {
-              label: this.chartTitle,
-              backgroundColor: "#f97979",
-              data: this.chartData
-            }
-          ]
+          datasets: data
         },
         {
           responsive: true,

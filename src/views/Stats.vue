@@ -1,6 +1,6 @@
 <template>
   <div class="stats">
-    <bar-chart :chartTitle="'Reportes'" :chartLabels="chartLabels" :chartData="chartData" :options="{responsive: true, maintainAspectRatio: false}" />
+    <bar-chart :chartTitle="'Reportes'" :chartLabels="chartLabels" :chartData="[reports, reportsUndef, reportsRed, reportsGreen]" :options="{responsive: true, maintainAspectRatio: false}" />
     <div id="map">
       <GmapMap
         :center="{lat:-38, lng:-61}"
@@ -32,6 +32,18 @@ export default {
         .ref("stats/reports-count")
         .orderByKey()
         .limitToLast(5),
+      reportsUndef: this.$store.state.db
+        .ref("stats/reports-count-undef")
+        .orderByKey()
+        .limitToLast(5),
+      reportsRed: this.$store.state.db
+        .ref("stats/reports-count-red")
+        .orderByKey()
+        .limitToLast(5),
+      reportsGreen: this.$store.state.db
+        .ref("stats/reports-count-green")
+        .orderByKey()
+        .limitToLast(5),
       locations: this.$store.state.db
         .ref("locations")
         .orderByChild("date")
@@ -45,13 +57,6 @@ export default {
         labels.push(r[".key"]);
       });
       return labels;
-    },
-    chartData: function() {
-      var data = [];
-      this.reports.forEach(r => {
-        data.push(r[".value"]);
-      });
-      return data;
     }
   }
 };
