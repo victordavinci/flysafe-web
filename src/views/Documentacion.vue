@@ -8,12 +8,16 @@
            La documentaci&oacute;n es una parte fundamental del Proyecto, nos permite realizar un seguimiento y auditar los procesos de desarrollo de la soluci&oacute;n.
         </p>
         <h2>Documentaci&oacute;n Respaldatoria</h2>
-        <p>Acceso al Drive de Documentaci&oacute;n
+        <p>Acceso al Drive de Documentaci&oacute;n:
             <a href="https://goo.gl/HCgwd1">Documentaci&oacute;n</a>
         </p>
         <h2>C&oacute;digo Fuente</h2>
-        <p>Acceso a GitHub: 
-            <a href="https://github.com/victordavinci/flysafe-web">C&oacute;digo</a>
+        <p>Acceso a GitHub:
+            <ul>
+                <li><a href="https://github.com/victordavinci/flysafe-web">WebApp</a></li>
+                <li><a href="https://github.com/victordavinci/flysafe-android">App de Android</a></li>
+                <li><a href="https://github.com/victordavinci/flysafe-cloud-functions">Funciones de Firebase</a></li>
+            </ul>
         </p>
     </div>
 </template>
