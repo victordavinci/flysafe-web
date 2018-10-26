@@ -24,7 +24,7 @@
       </router-link>
       <router-link to="/documentacion">
         <div class="icon"><font-awesome-icon :icon="['fas', 'file-alt']" size="5x" /></div>
-        <div class="text">Documentación</div>
+        <div class="text">Documentaci&oacute;n</div>
       </router-link>
     </div>
   </div>
