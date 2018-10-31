@@ -1,6 +1,6 @@
 <template>
     <div class="aircraft">
-        <div class="aircraft-registration"><b>Matr&iacute;cula:</b> {{ aircraft.registration }}</div>
+        <div class="aircraft-registration"><b>Matr&iacute;cula:</b> {{ aircraftRegistrationDecoded }}</div>
         <div class="aircraft-type"><b>Tipo:</b> {{ aircraftType }}</div>
     </div>
 </template>
@@ -12,6 +12,9 @@ export default {
   name: "Aircraft",
   props: ["aircraft"],
   computed: {
+    aircraftRegistrationDecoded: function() {
+      return decodeURIComponent(this.aircraft.registration);
+    },
     aircraftType: function() {
       return datatypes.getAircraftTypeName(this.aircraft.type);
     }

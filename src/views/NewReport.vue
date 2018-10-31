@@ -187,7 +187,10 @@ export default {
       }
       this.aircrafts.push({
         type: parseInt(this.aircraftType, 10),
-        registration: this.registration
+        registration: encodeURIComponent(this.registration).replace(
+          /\./g,
+          "%2E"
+        )
       });
       this.showModal = false;
       this.aircraftType = "";
