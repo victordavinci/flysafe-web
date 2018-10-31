@@ -131,7 +131,7 @@ export default {
       var vm = this,
         db = this.$store.state.db,
         user = this.$store.state.user,
-        ext = vm.photo.match(/^data:[^/]+\/([^;]+)/)[1];
+        ext = vm.photo ? vm.photo.match(/^data:[^/]+\/([^;]+)/)[1] : null;
       vm.progress = "...";
 
       var ref = db.ref("reports").push().key,
@@ -140,8 +140,7 @@ export default {
       for (a of vm.aircrafts) {
         aircrafts[a.registration] = { type: a.type };
       }
-      db
-        .ref("reports/" + ref)
+      db.ref("reports/" + ref)
         .set({
           date: vm.date,
           type: vm.occurrenceType,
@@ -176,7 +175,7 @@ export default {
           vm.aircrafts = [];
           vm.removePhoto();
           vm.progress = "";
-          vm.$router.replace("/reports");
+          vm.$router.replace("/reportes");
         });
     },
     onAircraftSubmit: function() {
