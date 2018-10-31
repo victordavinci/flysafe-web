@@ -12,6 +12,7 @@ import DatosPersonales from "./views/DatosPersonales.vue";
 import Documentacion from "./views/Documentacion.vue";
 import AndroidApp from "./views/AndroidApp.vue";
 import Funcionalidades from "./views/Funcionalidades.vue";
+import IniciarSesion from "./views/IniciarSesion.vue";
 
 import firebase from "firebase/app";
 require("firebase/auth");
@@ -25,6 +26,11 @@ var router = new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/iniciar-sesion",
+      name: "iniciar-sesion",
+      component: IniciarSesion
     },
     {
       path: "/datos-personales",

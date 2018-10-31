@@ -20,7 +20,7 @@
       </keep-alive>
     </div>
     <div id="footer">
-      &copy; 2018 - FlySafe v1.0
+      &copy; 2018 - FlySafe v1.2
     </div>
   </div>
 </template>
@@ -39,14 +39,7 @@ export default {
     toggle: function() {
       var vm = this;
       if (!this.currentUser) {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase
-          .auth()
-          .signInWithRedirect(provider)
-          .then(function(result) {
-            vm.$store.commit("login", result.user);
-          })
-          .catch(error => console.log(error));
+        vm.$router.replace("/iniciar-sesion");
       } else {
         firebase
           .auth()
