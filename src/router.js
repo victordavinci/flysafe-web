@@ -102,8 +102,7 @@ router.beforeEach((to, from, next) => {
           localStorage.setItem("location", to.path);
           next();
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
           localStorage.setItem("location", from.path);
           next({ path: from.fullPath, replace: true });
         });

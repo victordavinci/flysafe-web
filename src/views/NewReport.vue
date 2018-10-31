@@ -118,6 +118,7 @@ export default {
       this.photo = null;
     },
     onSubmit: function() {
+      this.reportError = "";
       if (this.date === "") {
         this.reportError = "The date field is required";
       } else if (this.occurrenceType === "") {
