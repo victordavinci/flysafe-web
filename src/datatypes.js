@@ -29,6 +29,10 @@ const aircraftTypes = [
   {
     value: 3,
     label: "Experimental"
+  },
+  {
+    value: 4,
+    label: "Drone"
   }
 ];
 
