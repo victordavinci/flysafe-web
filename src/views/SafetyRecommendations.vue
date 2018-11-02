@@ -1,5 +1,11 @@
 <template>
     <div id="rso">
+        <h1>Recomendaciones de seguridad</h1>
+        <p>
+          Las recomendaciones de seguridad son propuestas basadas en la informaci&oacute;n obtenida de investigaciones de sucesos aeronauticos.
+          Se incluyen tambi&eacute;n buenas pr&aacute;cticas y acciones sugeridas sobre la operaci&oacute;n de aeronaves y servicios de tr&aacute;nsito a&eacute;reo.
+          Estas medidas preventivas son necesarias para aumentar la seguridad operacional de la aviaci&oacute;n.
+        </p>
         <div class="rso" v-for="r in reversed" :key="r['.key']">
             <div class="header">
                 <div class="date">{{ r.date }}</div>

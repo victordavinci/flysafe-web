@@ -1,5 +1,6 @@
 <template>
     <div id="reports">
+        <h1>Reportes</h1>
         <div class="my-reports"><label><input type="checkbox" @change="myReports" v-model="propios" /> Mis reportes</label></div>
         <div class="new-report"><router-link to="reportes/nuevo">Nuevo Reporte</router-link></div>
         <hr class="clearfix" />

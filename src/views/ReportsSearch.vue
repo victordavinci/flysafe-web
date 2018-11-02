@@ -1,5 +1,11 @@
 <template>
     <div id="search">
+        <h1>B&uacute;squeda</h1>
+        <p>
+          Las b&uacute;squedas de reportes de sucesos, est&aacute;n asociadas a la matr&iacute;cula de las aeronaves ya que es el dato mas relevante en un suceso.
+          La matr&iacute;cula es la identificacion de la aeronave, por lo que si una aeronave tiene mas de un suceso mediante este formulario se podran ver todos
+          los eventos relacionados con la aeronave.
+        </p>
         <input type="text" placeholder="Matrícula" v-model.trim="registration" @keyup.enter="onSearch" />
         <button @click="onSearch">Buscar</button>
         <hr />
@@ -28,13 +34,12 @@ export default {
       var vm = this;
       var db = this.$store.state.db;
       if (this.registration === "") {
-        this.searchMessage = "Aircraft registration is a required field";
+        this.searchMessage = "Se debe especificar la matrícula";
         return;
       }
-      this.searchMessage = "...";
+      this.searchMessage = "Buscando ...";
       vm.$set(vm, "reports", []);
-      db
-        .ref("aircrafts")
+      db.ref("aircrafts")
         .orderByKey()
         .equalTo(this.registration)
         .limitToLast(20)
@@ -46,11 +51,10 @@ export default {
           });
           var rs = [];
           if (!a.length) {
-            this.searchMessage = "There are no results for your search";
+            this.searchMessage = "No se han encontrado reportes";
           }
           a.forEach(k => {
-            db
-              .ref("reports/" + k)
+            db.ref("reports/" + k)
               .once("value")
               .then(r => {
                 var val = r.val();

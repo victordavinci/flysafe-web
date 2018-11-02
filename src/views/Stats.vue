@@ -1,22 +1,48 @@
 <template>
   <div class="stats">
+    <h1>Estad&iacute;sticas</h1>
     <bar-chart :chartTitle="'Reportes'" :chartLabels="chartLabels" :chartData="[reports, reportsUndef, reportsRed, reportsGreen]" :options="{responsive: true, maintainAspectRatio: false}" />
-    <div id="map">
-      <GmapMap
-        :center="{lat:-38, lng:-61}"
-        :zoom="4"
-        map-type-id="terrain"
-        style="width: 500px; height: 600px"
-      >
-          <GmapMarker
-            :key="index"
-            v-for="(m, index) in locations"
-            :position="{lat: m.lat, lng: m.lng}"
-          />
-      </GmapMap>
+    <h1>Mapa de reportes</h1>
+    <div class="row">
+      <div class="col-6">
+        <div id="map">
+          <GmapMap
+            :center="{lat:-38, lng:-61}"
+            :zoom="4"
+            map-type-id="terrain"
+            style="width: 500px; height: 600px"
+          >
+              <GmapMarker
+                :key="index"
+                v-for="(m, index) in locations"
+                :position="{lat: m.lat, lng: m.lng}"
+              />
+          </GmapMap>
+        </div>
+      </div>
+      <div class="col-6">
+        <p>El mapa de reportes brinda una vista general y georreferenciada de los sucesos reportados en la plataforma FlySafe.</p>
+        <p>
+          La actualizaci&oacute;n es en tiempo real e incluye los &uacute;ltimos 100 reportes a&uacute;n cuando no est&eacute;n validados; por lo que la
+          informaci&oacute;n del mapa de reportes puede ser modificada y/o actualizada peri&oacute;dicamente.
+        </p>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+@media all and (min-width: 1300px) {
+  .row {
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .col-6 {
+    width: 50%;
+    float: left;
+  }
+}
+</style>
 
 <script>
 import BarChart from "@/components/BarChart.js";

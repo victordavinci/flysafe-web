@@ -32,7 +32,7 @@ const aircraftTypes = [
   },
   {
     value: 4,
-    label: "Drone"
+    label: "Dron"
   }
 ];
 
