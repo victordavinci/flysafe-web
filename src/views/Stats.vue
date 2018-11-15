@@ -1,6 +1,7 @@
 <template>
   <div class="stats">
     <h1>Estad&iacute;sticas</h1>
+    <p>FlySafe cuando recibe un reporte de un suceso, un equipo técnico se encarga de validarlo, y asegurar la calidad de la información, evitando reportes duplicados, falsos positivos o reportes falsos. Es por ello que si un reporte no está validado o es rechazado, puede ser que no cumpla con los requisitos de un reporte.</p>
     <bar-chart :chartTitle="'Reportes'" :chartLabels="chartLabels" :chartData="[reports, reportsUndef, reportsRed, reportsGreen]" :options="{responsive: true, maintainAspectRatio: false}" />
     <h1>Mapa de reportes</h1>
     <div class="row">

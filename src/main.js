@@ -45,9 +45,27 @@ store.commit("setStorage", firebase.storage());
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    store.commit("login", user);
-    if ((localStorage.getItem("location") || "/") === "/") {
-      router.push("/reportes");
+    if (!user.emailVerified) {
+      if (store.state.pending.indexOf(user.email) < 0) {
+        user
+          .sendEmailVerification()
+          .then(function() {
+            store.commit("addPendingVerification", user.email);
+            alert(
+              "Se ha enviado un email de verificación a su casilla de correo"
+            );
+            firebase.auth().signOut();
+          })
+          .error(function() {
+            alert("No se ha podido enviar el email de verificación");
+            firebase.auth().signOut();
+          });
+      }
+    } else {
+      store.commit("login", user);
+      if ((localStorage.getItem("location") || "/") === "/") {
+        router.push("/reportes");
+      }
     }
   } else {
     store.commit("logout");

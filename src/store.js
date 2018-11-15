@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     user: null,
     db: null,
-    storage: null
+    storage: null,
+    pending: []
   },
   mutations: {
     setDb(state, db) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.user = null;
+    },
+    addPendingVerification(state, email) {
+      state.pending.push(email);
     }
   }
 });

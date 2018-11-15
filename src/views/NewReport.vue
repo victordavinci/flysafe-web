@@ -4,32 +4,32 @@
         <div class="text-center error" v-if="reportError">{{ reportError }}</div>
         <form autocomplete="off" @submit.prevent="onSubmit">
             <div class="row">
-                <label for="date"><b>Date: </b></label>
+                <label for="date"><b><span title="Requerido">*</span>Fecha: </b></label>
                 <input type="date" v-model.trim="date" required id="date" placeholder="yyyy-MM-dd" />
             </div>
             <div class="row">
-                <label for="type"><b>Type: </b></label>
+                <label for="type"><b><span title="Requerido">*</span>Tipo: </b></label>
                 <select required v-model="occurrenceType">
-                    <option value="" disabled>Select an option</option>
+                    <option value="" disabled>Elija una opci&oacute;n</option>
                     <option v-for="ot in occurrenceTypes" :key="ot.value" :value="ot.value">{{ ot.label }}</option>
                 </select>
             </div>
             <div class="row">
-                <label for="narrative"><b>Narrative: </b></label>
-                <textarea id="narrative" v-model.trim="narrative" placeholder="Describe the occurrence..."></textarea>
+                <label for="narrative"><b><span title="Requerido">*</span>Narrativa: </b></label>
+                <textarea id="narrative" v-model.trim="narrative" placeholder="Describa el suceso..."></textarea>
             </div>
             <div class="row">
-                <div><b>Aircrafts: </b></div>
+                <div><b><span title="Requerido">*</span>Aeronaves: </b></div>
                 <div>
                     <div class="new-aircraft" v-for="aircraft in aircrafts" :key="aircraft.key">
                         <button title="Remove aircraft" @click.prevent="removeAircraft(aircraft)">&#x274c;</button>
                         <Aircraft :aircraft="aircraft" />
                     </div>
-                    <div class="add-aircraft" @click.prevent><button @click="showModal = true">Add aircraft</button></div>
+                    <div class="add-aircraft" @click.prevent><button @click="showModal = true">Agregar Aeronave</button></div>
                 </div>
             </div>
             <div class="row">
-              <label for="photo"><b>Photo: </b></label>
+              <label for="photo"><b>Foto: </b></label>
               <div>
                 <input type="file" @change="encodeImageFileAsURL" ref="fileInput" />
                 <button v-if="photo" @click.prevent="removePhoto">X</button>
@@ -37,28 +37,28 @@
             </div>
             <div class="row">
                 <div></div>
-                <div class="button-right"><button>Submit Report{{ progress }}</button></div>
+                <div class="button-right"><button>Enviar Reporte{{ progress }}</button></div>
             </div>
         </form>
         <Modal v-if="showModal">
-            <h3 slot="header">New Aircraft</h3>
+            <h3 slot="header">Nueva Aeronave</h3>
             <form autocomplete="off" @submit.prevent="onAircraftSubmit" ref="aircraftForm">
                 <div class="row">
-                    <label for="registration"><b>Registration: </b></label>
+                    <label for="registration"><b><span title="Requerido">*</span>Matr&iacute;cula: </b></label>
                     <input id="registration" type="text" placeholder="LV-ABC..." v-model.trim="registration" required />
                 </div>
                 <div class="row">
-                    <label for="aircraft-type"><b>Type: </b></label>
+                    <label for="aircraft-type"><b><span title="Requerido">*</span>Tipo: </b></label>
                     <select required v-model="aircraftType">
-                        <option value="" disabled>Select an option</option>
+                        <option value="" disabled>Elija una opci&oacute;n</option>
                         <option v-for="at in aircraftTypes" :key="at.value" :value="at.value">{{ at.label }}</option>
                     </select>
                 </div>
                 <div class="row">
                     <span></span>
                     <div class="button-right">
-                        <button @click.prevent="showModal = false">Cancel</button>
-                        <button>Add Aircraft</button>
+                        <button @click.prevent="showModal = false">Cancelar</button>
+                        <button>Agregar Aeronave</button>
                     </div>
                 </div>
             </form>
