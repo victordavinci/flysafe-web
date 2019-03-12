@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@firebase/app-types": "^0.3.2",
+    "@firebase/util": "0.x",
     "@fortawesome/fontawesome-free": "^5.3.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
     "@fortawesome/free-brands-svg-icons": "^5.3.1",
@@ -16,8 +17,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.3.1",
     "@fortawesome/vue-fontawesome": "^0.1.1",
     "chart.js": "^2.7.2",
-    "firebase": "^5.2.0",
-    "firebaseui": "^3.4.1",
+    "firebase": "^5.8.6",
+    "firebaseui": "^3.5.2",
     "vue": "^2.5.17",
     "vue-chartjs": "^3.3.2",
     "vue-router": "^3.0.1",

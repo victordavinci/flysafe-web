@@ -56,7 +56,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             );
             firebase.auth().signOut();
           })
-          .error(function() {
+          .catch(function() {
             alert("No se ha podido enviar el email de verificación");
             firebase.auth().signOut();
           });
