@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>FlySafe</h1>
-    <div class="bg-img"></div>
+    <iframe width="100%" height="450" src="https://www.youtube-nocookie.com/embed/4qDCwLYZ8Aw?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class="bg">La visión general del proyecto FlySafe, es la de aportar una herramienta tecnológica y ágil en el marco del proyecto de integración de sistemas de la Escuela Da Vinci; a la gestión de la seguridad operacional aérea y establecer los lineamientos para el proceso de mejora continua de la misma; la seguridad va más allá del presente proyecto y abre una ventana a futuros sistemas autogestionados.</div>
     <div class="bg gray">
       <router-link v-if="loggedIn" class="rso-link" to="/rso"><img alt="Recomendaciones de seguridad" title="Recomendaciones de seguridad" src="/img/rso.png" /></router-link>
@@ -98,13 +98,6 @@ export default {
 .icons a:hover .text {
   color: #fff;
   background: #006ca7;
-}
-
-.bg-img {
-  height: 300px;
-  background: url(/img/portada.jpg);
-  background-size: cover;
-  background-position-y: 0%;
 }
 
 .rso-link {
