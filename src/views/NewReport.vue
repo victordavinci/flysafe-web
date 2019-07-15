@@ -41,7 +41,9 @@
             </div>
         </form>
         <Modal v-if="showModal">
-            <h3 slot="header">Nueva Aeronave</h3>
+            <template v-slot:header>
+              <h3>Nueva Aeronave</h3>
+            </template>
             <form autocomplete="off" @submit.prevent="onAircraftSubmit" ref="aircraftForm">
                 <div class="row">
                     <label for="registration"><b><span title="Requerido">*</span>Matr&iacute;cula: </b></label>
@@ -62,9 +64,11 @@
                     </div>
                 </div>
             </form>
-            <div slot="footer">
-                <span v-if="aircraftError" class="error">{{ aircraftError }}</span>
-            </div>
+            <template v-slot:footer>
+              <div slot="footer">
+                  <span v-if="aircraftError" class="error">{{ aircraftError }}</span>
+              </div>
+            </template>
         </Modal>
     </div>
 </template>
