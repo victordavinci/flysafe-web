@@ -20,7 +20,7 @@
       </keep-alive>
     </div>
     <div id="footer">
-      &copy; 2018 - FlySafe v1.2
+      &copy; 2018 - 2019 - FlySafe v1.2
     </div>
   </div>
 </template>
