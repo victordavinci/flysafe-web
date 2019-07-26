@@ -39,10 +39,10 @@ export default {
         ];
       } else {
         data = [
-          { label: "Total Reports", backgroundColor: "#7979f9", data: [] },
-          { label: "Not validated", backgroundColor: "#797979", data: [] },
-          { label: "Rejected", backgroundColor: "#f97979", data: [] },
-          { label: "Accepted", backgroundColor: "#79f979", data: [] }
+          { label: this.$t("message.total_reports"), backgroundColor: "#7979f9", data: [] },
+          { label: this.$t("message.not_validated"), backgroundColor: "#797979", data: [] },
+          { label: this.$t("message.rejected"), backgroundColor: "#f97979", data: [] },
+          { label: this.$t("message.accepted"), backgroundColor: "#79f979", data: [] }
         ];
         this.chartData[0].forEach(r => {
           data[0].data.push(r[".value"]);

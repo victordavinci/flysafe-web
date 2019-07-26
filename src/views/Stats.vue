@@ -1,9 +1,9 @@
 <template>
   <div class="stats">
-    <h1>Estad&iacute;sticas</h1>
-    <p>FlySafe cuando recibe un reporte de un suceso, un equipo técnico se encarga de validarlo, y asegurar la calidad de la información, evitando reportes duplicados, falsos positivos o reportes falsos. Es por ello que si un reporte no está validado o es rechazado, puede ser que no cumpla con los requisitos de un reporte.</p>
-    <bar-chart :chartTitle="'Reportes'" :chartLabels="chartLabels" :chartData="[reports, reportsUndef, reportsRed, reportsGreen]" :options="{responsive: true, maintainAspectRatio: false}" />
-    <h1>Mapa de reportes</h1>
+    <h1>{{ $t("message.stats") }}</h1>
+    <p>{{ $t("message.stats_description") }}</p>
+    <bar-chart :chartTitle='$t("message.reports")' :chartLabels="chartLabels" :chartData="[reports, reportsUndef, reportsRed, reportsGreen]" :options="{responsive: true, maintainAspectRatio: false}" />
+    <h1>{{ $t("message.reports_map") }}</h1>
     <div class="row">
       <div class="col-6">
         <div id="map">
@@ -22,11 +22,8 @@
         </div>
       </div>
       <div class="col-6">
-        <p>El mapa de reportes brinda una vista general y georreferenciada de los sucesos reportados en la plataforma FlySafe.</p>
-        <p>
-          La actualizaci&oacute;n es en tiempo real e incluye los &uacute;ltimos 100 reportes a&uacute;n cuando no est&eacute;n validados; por lo que la
-          informaci&oacute;n del mapa de reportes puede ser modificada y/o actualizada peri&oacute;dicamente.
-        </p>
+        <p>{{ $t("message.reports_map_1") }}</p>
+        <p>{{ $t("message.reports_map_2") }}</p>
       </div>
     </div>
   </div>

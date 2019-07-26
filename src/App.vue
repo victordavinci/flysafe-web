@@ -4,15 +4,19 @@
       <router-link to="/"><img class="logo" src="/img/icon.png" /></router-link>
       <div class="align-right">
         <span v-if="currentUser">{{ currentUser.email }}</span>
-        <a href="#" @click.prevent="toggle" v-if="!currentUser"><span>Iniciar sesi&oacute;n</span></a>
-        <a href="#" @click.prevent="toggle" v-if="currentUser"><span>Cerrar sesi&oacute;n</span></a>
+        <a href="#" @click.prevent="toggle" v-if="!currentUser"><span>{{ $t("message.login") }}</span></a>
+        <a href="#" @click.prevent="toggle" v-if="currentUser"><span>{{ $t("message.logout") }}</span></a>
       </div>
     </div>
     <div id="nav" v-if="currentUser !== null">
-        <router-link to="/">Inicio</router-link>
-        <router-link to="/reportes" v-if="currentUser">Reportes</router-link>
-        <router-link to="/busqueda" v-if="currentUser">B&uacute;squeda</router-link>
-        <router-link to="/estadisticas">Estad&iacute;sticas</router-link>
+        <router-link to="/">{{ $t("message.home") }}</router-link>
+        <router-link to="/reportes" v-if="currentUser">{{ $t("message.reports") }}</router-link>
+        <router-link to="/busqueda" v-if="currentUser">{{ $t("message.search") }}</router-link>
+        <router-link to="/estadisticas">{{ $t("message.stats") }}</router-link>
+        <a href="#" @click.prevent="toggleLang">
+          <span v-if="lang=='en'">Español</span>
+          <span v-if="lang=='es'">English</span>
+        </a>
     </div>
     <div id="app-body">
       <keep-alive>
@@ -20,7 +24,7 @@
       </keep-alive>
     </div>
     <div id="footer">
-      &copy; 2018 - 2019 - FlySafe v1.2
+      &copy; 2018 - 2019 - FlySafe v1.4
     </div>
   </div>
 </template>
@@ -31,6 +35,9 @@ import firebase from "firebase/app";
 export default {
   name: "App",
   computed: {
+    lang: function() {
+      return this.$store.state.i18n.locale;
+    },
     currentUser: function() {
       return this.$store.state.user;
     }
@@ -50,6 +57,10 @@ export default {
           })
           .catch(error => console.log(error));
       }
+    },
+    toggleLang: function() {
+      var lang = this.$store.state.i18n.locale;
+      this.$store.state.i18n.locale = lang == "en" ? "es" : "en";
     }
   }
 };

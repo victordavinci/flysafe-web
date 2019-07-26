@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     db: null,
+    i18n: null,
     storage: null,
     pending: []
   },
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.user = null;
+    },
+    setI18n(state, i18n) {
+      state.i18n = i18n;
     },
     addPendingVerification(state, email) {
       state.pending.push(email);

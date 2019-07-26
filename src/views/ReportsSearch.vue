@@ -1,13 +1,9 @@
 <template>
     <div id="search">
-        <h1>B&uacute;squeda</h1>
-        <p>
-          Las b&uacute;squedas de reportes de sucesos, est&aacute;n asociadas a la matr&iacute;cula de las aeronaves ya que es el dato mas relevante en un suceso.
-          La matr&iacute;cula es la identificacion de la aeronave, por lo que si una aeronave tiene mas de un suceso mediante este formulario se podran ver todos
-          los eventos relacionados con la aeronave.
-        </p>
-        <input type="text" placeholder="Matrícula" v-model.trim="registration" @keyup.enter="onSearch" />
-        <button @click="onSearch">Buscar</button>
+        <h1>{{ $t("message.search") }}</h1>
+        <p>{{ $t("message.search_description") }}</p>
+        <input type="text" :placeholder='$t("message.registration")' v-model.trim="registration" @keyup.enter="onSearch" />
+        <button @click="onSearch">{{ $t("message.search_v") }}</button>
         <hr />
         <div v-if="!reports.length">{{ searchMessage }}</div>
         <ReportsList v-if="reports.length" :reports="reports" />
@@ -34,10 +30,10 @@ export default {
       var vm = this;
       var db = this.$store.state.db;
       if (this.registration === "") {
-        this.searchMessage = "Se debe especificar la matrícula";
+        this.searchMessage = this.$t("message.registration_required");
         return;
       }
-      this.searchMessage = "Buscando ...";
+      this.searchMessage = this.$t("message.searching");
       vm.$set(vm, "reports", []);
       db.ref("aircrafts")
         .orderByKey()
@@ -51,7 +47,7 @@ export default {
           });
           var rs = [];
           if (!a.length) {
-            this.searchMessage = "No se han encontrado reportes";
+            this.searchMessage = this.$t("message.no_reports_found");
           }
           a.forEach(k => {
             db.ref("reports/" + k)

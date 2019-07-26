@@ -1,38 +1,38 @@
 const occurrenceTypes = [
   {
     value: 0,
-    label: "Se desconoce"
+    label: "message.unknown"
   },
   {
     value: 1,
-    label: "Accidente"
+    label: "message.accident"
   },
   {
     value: 2,
-    label: "Incidente"
+    label: "message.incident"
   }
 ];
 
 const aircraftTypes = [
   {
     value: 0,
-    label: "Se desconoce"
+    label: "message.unknown"
   },
   {
     value: 1,
-    label: "Avión"
+    label: "message.airplane"
   },
   {
     value: 2,
-    label: "Helicoptero"
+    label: "message.helicopter"
   },
   {
     value: 3,
-    label: "Experimental"
+    label: "message.experimental"
   },
   {
     value: 4,
-    label: "Dron"
+    label: "message.drone"
   }
 ];
 

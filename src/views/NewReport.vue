@@ -1,35 +1,35 @@
 <template>
     <div id="new-report">
-        <h3>New Report</h3>
+        <h3>{{ $t("message.new_report") }}</h3>
         <div class="text-center error" v-if="reportError">{{ reportError }}</div>
         <form autocomplete="off" @submit.prevent="onSubmit">
             <div class="row">
-                <label for="date"><b><span title="Requerido">*</span>Fecha: </b></label>
+                <label for="date"><b><span :title='$t("message.required")'>*</span>{{ $t("message.date") }}: </b></label>
                 <input type="date" v-model.trim="date" required id="date" placeholder="yyyy-MM-dd" />
             </div>
             <div class="row">
-                <label for="type"><b><span title="Requerido">*</span>Tipo: </b></label>
+                <label for="type"><b><span :title='$t("message.required")'>*</span>{{ $t("message.type") }}: </b></label>
                 <select required v-model="occurrenceType">
-                    <option value="" disabled>Elija una opci&oacute;n</option>
-                    <option v-for="ot in occurrenceTypes" :key="ot.value" :value="ot.value">{{ ot.label }}</option>
+                    <option value="" disabled>{{ $t("message.choose_an_option") }}</option>
+                    <option v-for="ot in occurrenceTypes" :key="ot.value" :value="ot.value">{{ $t(ot.label) }}</option>
                 </select>
             </div>
             <div class="row">
-                <label for="narrative"><b><span title="Requerido">*</span>Narrativa: </b></label>
-                <textarea id="narrative" v-model.trim="narrative" placeholder="Describa el suceso..."></textarea>
+                <label for="narrative"><b><span :title='$t("message.required")'>*</span>{{ $t("message.narrative") }}: </b></label>
+                <textarea id="narrative" v-model.trim="narrative" :placeholder='$t("message.descrive_the_event")'></textarea>
             </div>
             <div class="row">
-                <div><b><span title="Requerido">*</span>Aeronaves: </b></div>
+                <div><b><span :title='$t("message.required")'>*</span>{{ $t("message.aircraft_s") }}: </b></div>
                 <div>
                     <div class="new-aircraft" v-for="aircraft in aircrafts" :key="aircraft.key">
                         <button title="Remove aircraft" @click.prevent="removeAircraft(aircraft)">&#x274c;</button>
                         <Aircraft :aircraft="aircraft" />
                     </div>
-                    <div class="add-aircraft" @click.prevent><button @click="showModal = true">Agregar Aeronave</button></div>
+                    <div class="add-aircraft" @click.prevent><button @click="showModal = true">{{ $t("message.add_aircraft") }}</button></div>
                 </div>
             </div>
             <div class="row">
-              <label for="photo"><b>Foto: </b></label>
+              <label for="photo"><b>{{ $t("message.photo") }}: </b></label>
               <div>
                 <input type="file" @change="encodeImageFileAsURL" ref="fileInput" />
                 <button v-if="photo" @click.prevent="removePhoto">X</button>
@@ -37,30 +37,30 @@
             </div>
             <div class="row">
                 <div></div>
-                <div class="button-right"><button>Enviar Reporte{{ progress }}</button></div>
+                <div class="button-right"><button>{{ $t("message.send_report") }}{{ progress }}</button></div>
             </div>
         </form>
         <Modal v-if="showModal">
             <template v-slot:header>
-              <h3>Nueva Aeronave</h3>
+              <h3>{{ $t("message.new_aircraft") }}</h3>
             </template>
             <form autocomplete="off" @submit.prevent="onAircraftSubmit" ref="aircraftForm">
                 <div class="row">
-                    <label for="registration"><b><span title="Requerido">*</span>Matr&iacute;cula: </b></label>
+                    <label for="registration"><b><span :title='$t("message.required")'>*</span>{{ $t("message.registration") }}: </b></label>
                     <input id="registration" type="text" placeholder="LV-ABC..." v-model.trim="registration" required />
                 </div>
                 <div class="row">
-                    <label for="aircraft-type"><b><span title="Requerido">*</span>Tipo: </b></label>
+                    <label for="aircraft-type"><b><span :title='$t("message.required")'>*</span>{{ $t("message.type") }}: </b></label>
                     <select required v-model="aircraftType">
-                        <option value="" disabled>Elija una opci&oacute;n</option>
-                        <option v-for="at in aircraftTypes" :key="at.value" :value="at.value">{{ at.label }}</option>
+                        <option value="" disabled>{{ $t("message.choose_an_option") }}</option>
+                        <option v-for="at in aircraftTypes" :key="at.value" :value="at.value">{{ $t(at.label) }}</option>
                     </select>
                 </div>
                 <div class="row">
                     <span></span>
                     <div class="button-right">
-                        <button @click.prevent="showModal = false">Cancelar</button>
-                        <button>Agregar Aeronave</button>
+                        <button @click.prevent="showModal = false">{{ $t("message.cancel") }}</button>
+                        <button>{{ $t("message.add_aircraft") }}</button>
                     </div>
                 </div>
             </form>
@@ -124,11 +124,11 @@ export default {
     onSubmit: function() {
       this.reportError = "";
       if (this.date === "") {
-        this.reportError = "The date field is required";
+        this.reportError = this.$t("message.date_field_required");
       } else if (this.occurrenceType === "") {
-        this.reportError = "Occurrence type is required";
+        this.reportError = this.$t("message.occurrence_type_required");
       } else if (this.aircrafts.length === 0) {
-        this.reportError = "You have to add at least one aircraft";
+        this.reportError = this.$t("message.aircraft_required");
       }
       if (this.reportError !== "") {
         return;
@@ -186,7 +186,7 @@ export default {
     onAircraftSubmit: function() {
       this.aircraftError = "";
       if (this.registration === "" || this.aircraftType === "") {
-        this.aircraftError = "All fields are required";
+        this.aircraftError = this.$t("message.all_fields_required");
         return;
       }
       this.aircrafts.push({

@@ -2,29 +2,29 @@
   <div class="home">
     <h1>FlySafe</h1>
     <iframe width="100%" height="450" src="https://www.youtube-nocookie.com/embed/4qDCwLYZ8Aw?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <div class="bg">La visión general del proyecto FlySafe, es la de aportar una herramienta tecnológica y ágil en el marco del proyecto de integración de sistemas de la Escuela Da Vinci; a la gestión de la seguridad operacional aérea y establecer los lineamientos para el proceso de mejora continua de la misma; la seguridad va más allá del presente proyecto y abre una ventana a futuros sistemas autogestionados.</div>
+    <div class="bg">{{ $t("message.vision") }}</div>
     <div class="bg gray">
-      <router-link v-if="loggedIn" class="rso-link" to="/rso"><img alt="Recomendaciones de seguridad" title="Recomendaciones de seguridad" src="/img/rso.png" /></router-link>
-      <h2>Recomendaciones sobre seguridad operacional</h2>
-      <p>Las RSO son la principal herramienta que tiene el sistema aeron&aacute;utico para evitar futuros accidentes</p>
+      <router-link v-if="loggedIn" class="rso-link" to="/rso"><img alt="Recomendaciones de seguridad" :title='$t("message.safety_recommendations")' src="/img/rso.png" /></router-link>
+      <h2>{{ $t("message.safety_recommendations") }}</h2>
+      <p>{{ $t("message.rso_description") }}</p>
     </div>
     <div class="bg icons">
-      <h1>Novedades</h1>
+      <h1>{{ $t("message.news") }}</h1>
       <router-link to="/datos-personales">
         <div class="icon"><font-awesome-icon :icon="['fas', 'lock']" size="5x" /></div>
-        <div class="text">Datos personales</div>
+        <div class="text">{{ $t("message.personal_information") }}</div>
       </router-link>
       <router-link to="/app">
         <div class="icon"><font-awesome-icon :icon="['fab', 'android']" size="5x" /></div>
-        <div class="text">App Android</div>
+        <div class="text">{{ $t("message.android_app") }}</div>
       </router-link>
       <router-link to="/funcionalidades">
         <div class="icon"><font-awesome-icon :icon="['fas', 'clipboard-list']" size="5x" /></div>
-        <div class="text">Funcionalidades</div>
+        <div class="text">{{ $t("message.features") }}</div>
       </router-link>
       <router-link to="/documentacion">
         <div class="icon"><font-awesome-icon :icon="['fas', 'file-alt']" size="5x" /></div>
-        <div class="text">Documentaci&oacute;n</div>
+        <div class="text">{{ $t("message.documentation") }}</div>
       </router-link>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="aircraft">
-        <div class="aircraft-registration"><b>Matr&iacute;cula:</b> {{ aircraftRegistrationDecoded }}</div>
-        <div class="aircraft-type"><b>Tipo:</b> {{ aircraftType }}</div>
+        <div class="aircraft-registration"><b>{{ $t("message.registration") }}:</b> {{ aircraftRegistrationDecoded }}</div>
+        <div class="aircraft-type"><b>{{ $t("message.type") }}:</b> {{ $t(aircraftType) }}</div>
     </div>
 </template>
 

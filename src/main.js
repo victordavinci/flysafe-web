@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueFire from "vuefire";
+import VueI18n from "vue-i18n";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -13,6 +14,7 @@ import {
 import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import * as VueGoogleMaps from "vue2-google-maps";
+import messages from "./langs";
 
 import firebase from "firebase/app";
 require("firebase/auth");
@@ -24,6 +26,7 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 Vue.use(VueFire);
+Vue.use(VueI18n);
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyAIfcF4g2UdZcrgsKAxxJ1odUoFL_o7LdQ"
@@ -43,6 +46,13 @@ var firebaseApp = firebase.initializeApp(config);
 store.commit("setDb", firebaseApp.database());
 store.commit("setStorage", firebase.storage());
 
+const navLang = navigator.language.split("-")[0];
+const i18n = new VueI18n({
+  locale: navLang == "es" ? "es" : "en",
+  messages,
+});
+store.commit("setI18n", i18n);
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     if (!user.emailVerified) {
@@ -51,13 +61,11 @@ firebase.auth().onAuthStateChanged(function(user) {
           .sendEmailVerification()
           .then(function() {
             store.commit("addPendingVerification", user.email);
-            alert(
-              "Se ha enviado un email de verificación a su casilla de correo"
-            );
+            alert(i18n.t("message.email_sent"));
             firebase.auth().signOut();
           })
           .catch(function() {
-            alert("No se ha podido enviar el email de verificación");
+            alert(i18n.t("message.email_failure"));
             firebase.auth().signOut();
           });
       }
@@ -74,6 +82,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     app = new Vue({
       router,
       store,
+      i18n,
       render: h => h(App)
     }).$mount("#app");
   }

@@ -1,18 +1,19 @@
 <template>
     <div id="funcionalidades">
-        <h1>Funcionalidades</h1>
+        <h1>{{ $t("message.features") }}</h1>
         <div class="w75">
             <h2>FlySafe Web</h2>
             <ul>
-                <li>Información sobre FlySafe</li>
-                <li>Descarga de APK</li>
-                <li>Formulario de denuncia online usuarios registrados</li>
-                <li>Últimos reportes denunciados</li>
-                <li>Acceso exclusivo para usuarios registrados</li>
-                <li>Estado actual de mis reportes</li>
-                <li>Recomendaciones de seguridad</li>
-                <li>Estadísticas</li>
-                <li>Manual de usuario / reglamentación vigente</li>
+                <li>{{ $t("message.flysafe_info") }}</li>
+                <li>{{ $t("message.apk_download") }}</li>
+                <li>{{ $t("message.online_report_form") }}</li>
+                <li>{{ $t("message.images_for_reports") }}</li>
+                <li>{{ $t("message.latest_reports") }}</li>
+                <li>{{ $t("message.exclusive_access") }}</li>
+                <li>{{ $t("message.my_reports_status") }}</li>
+                <li>{{ $t("message.safety_recommendations") }}</li>
+                <li>{{ $t("message.stats") }}</li>
+                <li>{{ $t("message.user_manual") }}</li>
             </ul>
         </div>
         <div class="w25 r img">
@@ -23,16 +24,15 @@
         <div class="w75 r">
             <h2>FlySafe App</h2>
             <ul>
-                <li>Idioma Español / inglés</li>
-                <li>Últimas reportes</li>
-                <li>Registro de usuarios</li>
-                <li>Formulario de reportes para usuarios registrados</li>
-                <li>Imágenes para reportes</li>
-                <li>Georeferenciación</li>
-                <li>Estado actual de mis reportes</li>
-                <li>Novedades</li>
-                <li>Información para actuar en caso de accidente aéreo (Personal aeronáutico)</li>
-                <li>Información para tener en cuenta ante un accidente aéreo (Público en Gral.)</li>
+                <li>{{ $t("message.language_es_en") }}</li>
+                <li>{{ $t("message.latest_reports") }}</li>
+                <li>{{ $t("message.user_registration") }}</li>
+                <li>{{ $t("message.online_report_form_2") }}</li>
+                <li>{{ $t("message.georeferencing") }}</li>
+                <li>{{ $t("message.my_reports_status") }}</li>
+                <li>{{ $t("message.news") }}</li>
+                <li>{{ $t("message.in_case_of_accident_1") }}</li>
+                <li>{{ $t("message.in_case_of_accident_2") }}</li>
             </ul>
         </div>
         <div class="w25 img">
