@@ -3,6 +3,7 @@ import Router from "vue-router";
 import store from "./store";
 import Home from "./views/Home.vue";
 import Stats from "./views/Stats.vue";
+import Options from "./views/Options.vue";
 import Reports from "./views/Reports.vue";
 import SafetyRecommendations from "./views/SafetyRecommendations.vue";
 import NewReport from "./views/NewReport.vue";
@@ -56,6 +57,11 @@ var router = new Router({
       path: "/estadisticas",
       name: "stats",
       component: Stats
+    },
+    {
+      path: "/opciones",
+      name: "opciones",
+      component: Options
     },
     {
       path: "/reportes",

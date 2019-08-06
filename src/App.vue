@@ -13,10 +13,7 @@
         <router-link to="/reportes" v-if="currentUser">{{ $t("message.reports") }}</router-link>
         <router-link to="/busqueda" v-if="currentUser">{{ $t("message.search") }}</router-link>
         <router-link to="/estadisticas">{{ $t("message.stats") }}</router-link>
-        <a href="#" @click.prevent="toggleLang">
-          <span v-if="lang=='en'">Español</span>
-          <span v-if="lang=='es'">English</span>
-        </a>
+        <router-link to="/opciones">{{ $t("message.options") }}</router-link>
     </div>
     <div id="app-body">
       <keep-alive>
@@ -35,9 +32,6 @@ import firebase from "firebase/app";
 export default {
   name: "App",
   computed: {
-    lang: function() {
-      return this.$store.state.i18n.locale;
-    },
     currentUser: function() {
       return this.$store.state.user;
     }
@@ -57,10 +51,6 @@ export default {
           })
           .catch(error => console.log(error));
       }
-    },
-    toggleLang: function() {
-      var lang = this.$store.state.i18n.locale;
-      this.$store.state.i18n.locale = lang == "en" ? "es" : "en";
     }
   }
 };

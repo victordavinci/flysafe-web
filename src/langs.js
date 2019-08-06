@@ -28,6 +28,7 @@ const messages = {
             reports: "Reports",
             search: "Search",
             stats: "Stats",
+            options: "Options",
             // Reports
             my_reports: "My reports",
             new_report: "New Report",
@@ -81,8 +82,21 @@ const messages = {
             account_deleted: "Your account has been deleted",
             account_deleted_error: "An error has occurred while deleting your account.",
             // Documentacion
-            documentation_description: "In this section you will find all the supporting documentation on FlySafe, the Project Plan, Use Cases, Gantt Letter, Source Code, etc. Documentation is an essential part of the Project, it allows us to track and audit the development processes of the solution.",
-            supporting_documentation: "Supporting Documentation",
+            documentation_description: "All the documentation on FlySafe, the Project Plan, Use Cases, Gantt Letter, Source Code, etc. is available on Google Drive.",
+            help_intro: "In this section you will find information of interest for the use of FlySafe; as well as all the technical documentation of the platform.",
+            latest_version: "Latest version:",
+            app_month: "July",
+            web_month: "August",
+            user_manual_h: "User manual",
+            installation_manual_h: "Installation manual",
+            faq1: "What can I report?",
+            faq1a: "Accidents, aviation incidents of civil aircraft (aircraft, helicopters, gliders, drones, etc.)",
+            faq2: "Does it have legal consequences?",
+            faq2a: "No, the reports are only for the purpose of avoiding future events.",
+            faq3: "Is FlySafe available for iOS?",
+            faq3a: "No, it is currently available for Android and web browsers.",
+            faq4: "My report was not validated. Why?",
+            faq4a: "Reports are evaluated, if they do not fit into an aviation event, it will not be valid.",
             gdrive_access: "Access to the Documentation Drive",
             source_code: "Source Code",
             github_access: "GitHub Access",
@@ -102,6 +116,9 @@ const messages = {
             georeferencing: "Georeferencing",
             in_case_of_accident_1: "Information to act in the event of a plane crash (Aeronautical personnel)",
             in_case_of_accident_2: "Information to take into account before a plane crash (General Public)",
+            // Options
+            account_data: "Account data",
+            help: "Help",
         }
     },
     es: {
@@ -133,6 +150,7 @@ const messages = {
             reports: "Reportes",
             search: "Búsqueda",
             stats: "Estadísticas",
+            options: "Opciones",
             // Reports
             my_reports: "Mis reportes",
             new_report: "Nuevo Reporte",
@@ -186,8 +204,21 @@ const messages = {
             account_deleted: "Su cuenta ha sido eliminada",
             account_deleted_error: "Ha ocurrido un error al borrar su cuenta.",
             // Documentacion
-            documentation_description: "En esta sección encontrará toda la documentación respaldatoria sobre FlySafe, el Plan de Proyecto, Casos de Uso, Carta Gantt, Código Fuente, etc. La documentación es una parte fundamental del Proyecto, nos permite realizar un seguimiento y auditar los procesos de desarrollo de la solución.",
-            supporting_documentation: "Documentación Respaldatoria",
+            documentation_description: "Toda la documentación sobre FlySafe, el Plan de Proyecto, Casos de Uso, Carta Gantt, Código Fuente, etc. está disponible en Google Drive.",
+            help_intro: "En esta sección usted encontrará información de interés para el uso de FlySafe; como así también toda la documentación técnica de la plataforma.",
+            latest_version: "Última versión:",
+            app_month: "julio",
+            web_month: "agosto",
+            user_manual_h: "Manual de usuario",
+            installation_manual_h: "Manual de instalación",
+            faq1: "¿Qué puedo reportar?",
+            faq1a: "Accidentes, incidentes de aviación de aeronaves civiles (avión, helicópteros, planeadores, drones, etc)",
+            faq2: "¿Tiene consecuencias legales?",
+            faq2a: "No, los reportes son sólo a fines de evitar futuros eventos.",
+            faq3: "¿FlySafe está disponible para iOS?",
+            faq3a: "No, por el momento está disponible para Android y navegadores web.",
+            faq4: "Mi reporte no fue validado. ¿Por qué?",
+            faq4a: "Los reportes son evaluados, si no encuadran en un suceso de aviación, no será válido.",
             gdrive_access: "Acceso al Drive de Documentación",
             source_code: "Código Fuente",
             github_access: "Acceso a GitHub",
@@ -207,6 +238,9 @@ const messages = {
             georeferencing: "Georeferenciación",
             in_case_of_accident_1: "Información para actuar en caso de accidente aéreo (Personal aeronáutico)",
             in_case_of_accident_2: "Información para tener en cuenta ante un accidente aéreo (Público en Gral.)",
+            // Options
+            account_data: "Datos de la cuenta",
+            help: "Ayuda",
         }
     }
 }
