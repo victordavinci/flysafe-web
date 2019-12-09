@@ -1,5 +1,5 @@
 import Vue from "vue";
-import VueFire from "vuefire";
+import { rtdbPlugin as VueFire } from 'vuefire'
 import VueI18n from "vue-i18n";
 import App from "./App.vue";
 import router from "./router";
@@ -25,7 +25,7 @@ library.add(faLock, faAndroid, faClipboardList, faDownload, faFileAlt);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
-Vue.use(VueFire);
+Vue.use(VueFire)
 Vue.use(VueI18n);
 Vue.use(VueGoogleMaps, {
   load: {

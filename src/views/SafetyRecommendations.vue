@@ -19,6 +19,11 @@
 <script>
 export default {
   name: "SafetyRecommendations",
+  data: function() {
+    return {
+      recommendations: []
+    };
+  },
   firebase: function() {
     return {
       recommendations: this.$store.state.db

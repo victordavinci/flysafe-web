@@ -50,6 +50,15 @@ export default {
   components: {
     BarChart
   },
+  data: function() {
+    return {
+      reports: [],
+      reportsUndef: [],
+      reportsRed: [],
+      reportsGreen: [],
+      locations: []
+    };
+  },
   firebase: function() {
     return {
       reports: this.$store.state.db

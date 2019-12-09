@@ -19,7 +19,7 @@ export default {
     name: "DatosPersonales",
     computed: {
         currentUser: function() {
-        return this.$store.state.user;
+          return this.$store.state.user;
         }
     },
     methods: {

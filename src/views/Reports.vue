@@ -20,7 +20,8 @@ export default {
   },
   data: function() {
     return {
-      propios: false
+      propios: false,
+      reports: []
     };
   },
   firebase: function() {
@@ -47,7 +48,7 @@ export default {
           .equalTo(store.state.user.uid)
           .limitToLast(20);
       }
-      this.$bindAsArray("reports", reports);
+      this.$rtdbBind("reports", reports);
     }
   },
   computed: {
