@@ -71,9 +71,16 @@ firebase.auth().onAuthStateChanged(function(user) {
       }
     } else {
       store.commit("login", user);
-      if ((localStorage.getItem("location") || "/") === "/") {
-        router.push("/reportes");
-      }
+      store.state.db.ref("/admins/" + user.uid).once("value").then(s => {
+        if (s.exists()) {
+          store.commit("setAdmin", s.val());
+        } else {
+          store.commit("setAdmin", false);
+        }
+        if ((localStorage.getItem("location") || "/") === "/") {
+          router.push("/reportes");
+        }
+      });
     }
   } else {
     store.commit("logout");

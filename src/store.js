@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     db: null,
+    admin: false,
     i18n: null,
     storage: null,
     pending: []
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     setStorage(state, storage) {
       state.storage = storage;
+    },
+    setAdmin(state, admin) {
+      state.admin = admin;
     },
     login(state, user) {
       state.user = user;

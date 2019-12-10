@@ -16,6 +16,14 @@
             <img :src="photo" alt="Foto" />
           </div>
         </div>
+        <div v-if="admin" class="right">
+          <select v-model.number="validated" @change="onChangeValidated">
+            <option value="0">{{ $t("message.rep_not_validated") }}</option>
+            <option value="1">{{ $t("message.rep_invalid") }}</option>
+            <option value="2">{{ $t("message.rep_valid") }}</option>
+            <option value="3">{{ $t("message.rep_solved") }}</option>
+          </select>
+        </div>
     </div>
 </template>
 
@@ -30,7 +38,10 @@ export default {
   },
   props: ["report"],
   data: function() {
-    return { photo: null };
+    return {
+      photo: null,
+      validated: 0
+    };
   },
   created: function() {
     var report = this.report;
@@ -43,9 +54,13 @@ export default {
         .then(function(url) {
           vm.photo = url;
         });
+      vm.validated = this.report.validated || 0;
     }
   },
   computed: {
+    admin: function() {
+      return this.$store.state.admin;
+    },
     aircrafts: function() {
       var a = [];
       for (var i in this.report.aircrafts) {
@@ -69,6 +84,18 @@ export default {
       style[color] = true;
       return style;
     }
+  },
+  methods: {
+    onChangeValidated: function() {
+      var db = this.$store.state.db;
+      db.ref("reports/" + this.report[".key"])
+        .update({ "validated": this.validated || null }, function(error) {
+          if (error) {
+            this.validated = this.report.validated || 0;
+            alert("Ocurrió un error al actualizar el estado");
+          }
+        });
+    }
   }
 };
 </script>
@@ -86,14 +113,23 @@ export default {
   vertical-align: top;
 }
 
+.report > div.right {
+  float: right;
+}
+
 .report > div:not(:first-child) {
   margin-left: 50px;
+}
+
+.report::before {
+  content: "●";
+  float: right;
+  margin-left: 0.5em;
 }
 
 .report.green::before,
 .report.blue::before {
   content: "✓";
-  float: right;
 }
 
 .report.green {
@@ -106,7 +142,6 @@ export default {
 
 .report.red::before {
   content: "✗";
-  float: right;
 }
 
 .report.red {

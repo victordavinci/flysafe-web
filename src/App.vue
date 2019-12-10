@@ -3,7 +3,11 @@
     <div id="header">
       <router-link to="/"><img class="logo" src="/img/icon.png" /></router-link>
       <div class="align-right">
-        <span v-if="currentUser">{{ currentUser.email }}</span>
+        <span v-if="currentUser">
+          <span v-if="admin" :title="$t('message.admin')">⚙</span>
+          <span v-if="!admin" :title="$t('message.user')">👤</span>
+          {{ currentUser.email }}
+        </span>
         <a href="#" @click.prevent="toggle" v-if="!currentUser"><span>{{ $t("message.login") }}</span></a>
         <a href="#" @click.prevent="toggle" v-if="currentUser"><span>{{ $t("message.logout") }}</span></a>
       </div>
@@ -21,7 +25,7 @@
       </keep-alive>
     </div>
     <div id="footer">
-      &copy; 2018 - 2019 - FlySafe v1.4.1
+      &copy; 2018 - 2019 - FlySafe v1.5
     </div>
   </div>
 </template>
@@ -32,6 +36,9 @@ import firebase from "firebase/app";
 export default {
   name: "App",
   computed: {
+    admin: function() {
+      return this.$store.state.admin;
+    },
     currentUser: function() {
       return this.$store.state.user;
     }
@@ -160,5 +167,24 @@ hr {
 
 #nav a.router-link-exact-active {
   color: rgb(3, 155, 229);
+}
+
+.button {
+  color: #222;
+  text-decoration: none;
+  display: inline-block;
+  width: 15em;
+  border: 1px solid #f5f5f5;
+  border-radius: 0.25em;
+  padding: 0.5em 0;
+  background: #f5f5f5;
+  background: linear-gradient(#f5f5f5, #e5e5e5);
+  transition: border-color 0.5s;
+}
+.button:hover {
+    border: 1px solid #d5d5d5;
+}
+.button:active {
+    background: linear-gradient(#e5e5e5, #f5f5f5);
 }
 </style>

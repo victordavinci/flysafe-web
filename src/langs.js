@@ -22,6 +22,8 @@ const messages = {
             features: "Features",
             documentation: "Documentation",
             // App
+            admin: "Admin",
+            user: "User",
             login: "Log in",
             logout: "Log out",
             home: "Home",
@@ -32,6 +34,10 @@ const messages = {
             // Reports
             my_reports: "My reports",
             new_report: "New Report",
+            rep_not_validated: "Not validated",
+            rep_invalid: "Invalid",
+            rep_valid: "Valid",
+            rep_solved: "Solved",
             // ReportsList
             date: "Date",
             type: "Type",
@@ -144,6 +150,8 @@ const messages = {
             features: "Funcionalidades",
             documentation: "Documentación",
             // App
+            admin: "Admin",
+            user: "Usuario",
             login: "Iniciar sesión",
             logout: "Cerrar sesión",
             home: "Inicio",
@@ -154,6 +162,10 @@ const messages = {
             // Reports
             my_reports: "Mis reportes",
             new_report: "Nuevo Reporte",
+            rep_not_validated: "Sin validar",
+            rep_invalid: "Inválido",
+            rep_valid: "Válido",
+            rep_solved: "Resuelto",
             // ReportsList
             date: "Fecha",
             type: "Tipo",
