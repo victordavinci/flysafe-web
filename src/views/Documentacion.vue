@@ -4,8 +4,8 @@
         <p>{{ $t("message.help_intro")}}</p>
         <p>{{ $t("message.latest_version") }}</p>
         <ul>
-            <li>App: 1.4 ({{ $t("message.app_month") }} 2019)</li>
-            <li>Web: 1.4 ({{ $t("message.web_month") }} 2019)</li>
+            <li>App: 1.4.1 ({{ $t("message.app_month") }} 2019)</li>
+            <li>Web: 1.4.1 ({{ $t("message.web_month") }} 2019)</li>
         </ul>
         <p>{{ $t("message.user_manual_h") }}: <a href="#">link</a></p>
         <p>{{ $t("message.installation_manual_h") }}: <a href="#">link</a></p>
