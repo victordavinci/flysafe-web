@@ -11,6 +11,7 @@
         <p><a href="/app/flysafe-1.4.apk" class="download"><font-awesome-icon :icon="['fas', 'download']" size="lg" /> {{ $t("message.download") }} flysafe-1.4.apk</a> (SHA256: 96ce8a7b86cee25c6bb06a579991807d26207660da456e9c51b6048c77a47fd1)</p>
         <p><a href="/app/flysafe-1.4.1.apk" class="download"><font-awesome-icon :icon="['fas', 'download']" size="lg" /> {{ $t("message.download") }} flysafe-1.4.1.apk</a> (SHA256: add34b75f273966b21d7d3335f62a85407037eda43a52c3545c5cb1c1c74f435)</p>
         <p><a href="/app/flysafe-1.4.2.apk" class="download"><font-awesome-icon :icon="['fas', 'download']" size="lg" /> {{ $t("message.download") }} flysafe-1.4.2.apk</a> (SHA256: 9950fc33369cbf6271e36b90ff43e47f95eb3d15f38ebeabead158a3df19f379)</p>
+        <p><a href="/app/flysafe-1.4.3.apk" class="download"><font-awesome-icon :icon="['fas', 'download']" size="lg" /> {{ $t("message.download") }} flysafe-1.4.3.apk</a> (SHA256: 4e0ca0c3baf07633f3fc06e0fa917c3c40891ff6eaa8a9e560f2e8841e1f14bb)</p>
     </div>
 </template>
 
