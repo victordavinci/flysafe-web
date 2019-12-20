@@ -45,8 +45,9 @@ export default {
   },
   created: function() {
     var report = this.report;
+    var vm = this;
+    vm.validated = this.report.validated || 0;
     if (report.photoExt) {
-      var vm = this;
       this.$store.state.storage
         .ref()
         .child("photos/" + report[".key"] + "." + report.photoExt)
@@ -54,7 +55,6 @@ export default {
         .then(function(url) {
           vm.photo = url;
         });
-      vm.validated = this.report.validated || 0;
     }
   },
   computed: {
